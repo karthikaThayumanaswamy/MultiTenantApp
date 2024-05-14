@@ -43,3 +43,13 @@ jobs:
           app-name: ${{ env.AZURE_WEBAPP_NAME }} # Replace with your app name
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_DC1BBD7A7B994DAB8A2802CB9D2C6238  }} # Define secret variable in repository settings as per action documentation
           package: '/home/runner/work/MultiTenantApp/MultiTenantApp/samples/net6.0/IdentitySample/myapp/'
+
+      - name: Perform copy file operation for sql lite
+        shell: pwsh
+        run: |
+          echo "${{ github.workspace }}"
+          cd '${{ env.AZURE_WEBAPP_PACKAGE_PATH }}/myapp';
+          mkdir Data;
+          cd ${{ github.workspace }};
+          Copy-Item -Source "${{ github.workspace }}/samples/net6.0/Data/SharedIdentity.db" -Destination '${{ env.AZURE_WEBAPP_PACKAGE_PATH }}/myapp/Data' -Force;
+          Copy-Item -Source "${{ github.workspace }}/samples/net6.0/Data/InitechIdentity.db" -Destination '${{ env.AZURE_WEBAPP_PACKAGE_PATH }}/myapp/Data' -Force;
