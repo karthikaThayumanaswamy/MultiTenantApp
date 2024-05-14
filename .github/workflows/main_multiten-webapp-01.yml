@@ -33,6 +33,9 @@ jobs:
  
       - name: Restore dependencies
         run: dotnet restore samples/net6.0/IdentitySample/IdentitySample.csproj
+        
+      - name: Run Entity Framework Core migrations
+        run: dotnet ef database update --project samples/net6.0/IdentitySample/IdentitySample.csproj --startup-project samples/net6.0/IdentitySample/IdentitySample.csproj
  
       - name: dotnet publish
         run: dotnet publish -c Release -f net6.0 --property:PublishDir='${{ env.AZURE_WEBAPP_PACKAGE_PATH }}/myapp'
