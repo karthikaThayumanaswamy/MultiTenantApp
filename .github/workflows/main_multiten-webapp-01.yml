@@ -39,18 +39,7 @@ jobs:
         
       - name: Run Entity Framework Core migrations
         run: dotnet ef database update --project samples/net6.0/IdentitySample/IdentitySample.csproj --startup-project samples/net6.0/IdentitySample/IdentitySample.csproj
- 
-      - name: dotnet publish
-        run: dotnet publish -c Release -f net6.0 --property:PublishDir='${{ env.AZURE_WEBAPP_PACKAGE_PATH }}/myapp'
- 
-      # Deploy to Azure Web apps
-      - name: 'Run Azure webapp deploy action using publish profile credentials'
-        uses: azure/webapps-deploy@v3
-        with:
-          app-name: ${{ env.AZURE_WEBAPP_NAME }} # Replace with your app name
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_DC1BBD7A7B994DAB8A2802CB9D2C6238  }} # Define secret variable in repository settings as per action documentation
-          package: '/home/runner/work/MultiTenantApp/MultiTenantApp/samples/net6.0/IdentitySample/myapp/'
-
+     
       - name: Perform copy file operation for SQLite
         shell: pwsh
         run: |    
@@ -63,3 +52,16 @@ jobs:
           # Copy the SQLite database files
           Copy-Item -Path "${{ github.workspace }}/samples/net6.0/IdentitySample/Data/SharedIdentity.db" -Destination '${{ env.BUILD_D_PATH }}/myapp/Data' -Force
           Copy-Item -Path "${{ github.workspace }}/samples/net6.0/IdentitySample/Data/InitechIdentity.db" -Destination '${{ env.BUILD_D_PATH }}/myapp/Data' -Force
+ 
+      - name: dotnet publish
+        run: dotnet publish -c Release -f net6.0 --property:PublishDir='${{ env.AZURE_WEBAPP_PACKAGE_PATH }}/myapp'
+ 
+      # Deploy to Azure Web apps
+      - name: 'Run Azure webapp deploy action using publish profile credentials'
+        uses: azure/webapps-deploy@v3
+        with:
+          app-name: ${{ env.AZURE_WEBAPP_NAME }} # Replace with your app name
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_DC1BBD7A7B994DAB8A2802CB9D2C6238  }} # Define secret variable in repository settings as per action documentation
+          package: '/home/runner/work/MultiTenantApp/MultiTenantApp/samples/net6.0/IdentitySample/myapp/'
+
+     
