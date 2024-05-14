@@ -13,6 +13,7 @@ env:
   AZURE_WEBAPP_NAME: multiten-webapp-01    # set this to your application's name
   AZURE_WEBAPP_PACKAGE_PATH: '.'      # set this to the path to your web app project, defaults to the repository root
   DOTNET_VERSION: '6.0.x'
+  BUILD_D_PATH: '/home/runner/work/MultiTenantApp/MultiTenantApp/samples/net6.0/IdentitySample/'
  
 jobs:
   build:
@@ -48,8 +49,8 @@ jobs:
         shell: pwsh
         run: |
           echo "${{ github.workspace }}"
-          cd '${{ env.AZURE_WEBAPP_PACKAGE_PATH }}/myapp';
+          cd '${{env.BUILD_D_PATH}}/myapp';
           mkdir Data;
           cd ${{ github.workspace }};
-          Copy-Item -Source "${{ github.workspace }}/samples/net6.0/Data/SharedIdentity.db" -Destination '${{ env.AZURE_WEBAPP_PACKAGE_PATH }}/myapp/Data' -Force;
-          Copy-Item -Source "${{ github.workspace }}/samples/net6.0/Data/InitechIdentity.db" -Destination '${{ env.AZURE_WEBAPP_PACKAGE_PATH }}/myapp/Data' -Force;
+          Copy-Item -Source "${{ github.workspace }}/samples/net6.0/Data/SharedIdentity.db" -Destination '${{ env.BUILD_D_PATH }}/myapp/Data' -Force;
+          Copy-Item -Source "${{ github.workspace }}/samples/net6.0/Data/InitechIdentity.db" -Destination '${{ env.BUILD_D_PATH }}/myapp/Data' -Force;
