@@ -27,6 +27,9 @@ jobs:
         with:
           dotnet-version: ${{ env.DOTNET_VERSION }}
           include-prerelease: true
+          
+      - name: Install dotnet-ef tool
+        run: dotnet tool install --global dotnet-ef --version 6.0.6
  
       - name: Build with dotnet
         run: dotnet build samples/net6.0/IdentitySample/IdentitySample.csproj --configuration Release
