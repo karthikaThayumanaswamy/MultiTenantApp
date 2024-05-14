@@ -26,7 +26,7 @@ jobs:
         run: dotnet build samples/net6.0/IdentitySample/IdentitySample.csproj --configuration Release
 
       - name: Restore dependencies
-        run: dotnet restore
+        run: dotnet restore samples/net6.0/IdentitySample/IdentitySample.csproj 
       
       - name: dotnet publish
         run: dotnet publish -c Release -o ${{env.DOTNET_ROOT}}/myapp
