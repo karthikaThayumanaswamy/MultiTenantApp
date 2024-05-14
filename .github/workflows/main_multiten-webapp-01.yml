@@ -34,7 +34,7 @@ jobs:
         run: dotnet restore samples/net6.0/IdentitySample/IdentitySample.csproj
  
       - name: dotnet publish
-        run: dotnet publish -c Release --property:PublishDir='${{ env.AZURE_WEBAPP_PACKAGE_PATH }}/myapp'
+        run: dotnet publish -c Release -f net6.0 --property:PublishDir='${{ env.AZURE_WEBAPP_PACKAGE_PATH }}/myapp'
  
       # Deploy to Azure Web apps
       - name: 'Run Azure webapp deploy action using publish profile credentials'
