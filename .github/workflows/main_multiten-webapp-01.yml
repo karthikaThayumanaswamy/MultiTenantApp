@@ -23,7 +23,7 @@ jobs:
           include-prerelease: true
 
       - name: Build with dotnet
-        run: dotnet build --configuration Release
+        run: dotnet build samples/net6.0/IdentitySample/IdentitySample.csproj --configuration Release
 
       - name: Restore dependencies
         run: dotnet restore
