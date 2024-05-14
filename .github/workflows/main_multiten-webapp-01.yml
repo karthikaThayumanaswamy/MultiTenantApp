@@ -45,12 +45,15 @@ jobs:
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_DC1BBD7A7B994DAB8A2802CB9D2C6238  }} # Define secret variable in repository settings as per action documentation
           package: '/home/runner/work/MultiTenantApp/MultiTenantApp/samples/net6.0/IdentitySample/myapp/'
 
-      - name: Perform copy file operation for sql lite
-        shell: bash
-        run: |
+      - name: Perform copy file operation for SQLite
+        shell: pwsh
+        run: |    
+          # Output the GitHub workspace directory for debugging
           echo "${{ github.workspace }}"
-          cd '${{env.BUILD_D_PATH}}/myapp';
-          mkdir Data;
-          cd ${{ github.workspace }};
-          Copy-Item -Source "${{ github.workspace }}/samples/net6.0/Data/SharedIdentity.db" -Destination '${{ env.BUILD_D_PATH }}/myapp/Data' -Force;
-          Copy-Item -Source "${{ github.workspace }}/samples/net6.0/Data/InitechIdentity.db" -Destination '${{ env.BUILD_D_PATH }}/myapp/Data' -Force;
+          
+          # Create the Data directory if it doesn't exist
+          New-Item -Path '${{ env.BUILD_D_PATH }}/myapp/Data' -ItemType Directory -Force
+      
+          # Copy the SQLite database files
+          Copy-Item -Path "${{ github.workspace }}/samples/net6.0/Data/SharedIdentity.db" -Destination '${{ env.BUILD_D_PATH }}/myapp/Data' -Force
+          Copy-Item -Path "${{ github.workspace }}/samples/net6.0/Data/InitechIdentity.db" -Destination '${{ env.BUILD_D_PATH }}/myapp/Data' -Force
