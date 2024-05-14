@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyDescriptionAttribute("Entity Framework Core support for Finbuckle.MultiTenant.")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+d4eb300545f4338a58ce8cd06dce1e6c974aa28b")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+c317075e8cca5e107298bcb46b47f814a7fa4f1d")]
 [assembly: System.Reflection.AssemblyProductAttribute("Finbuckle.MultiTenant.EntityFrameworkCore")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Finbuckle.MultiTenant.EntityFrameworkCore")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
