@@ -46,7 +46,7 @@ jobs:
           package: '/home/runner/work/MultiTenantApp/MultiTenantApp/samples/net6.0/IdentitySample/myapp/'
 
       - name: Perform copy file operation for sql lite
-        shell: pwsh
+        shell: bash
         run: |
           echo "${{ github.workspace }}"
           cd '${{env.BUILD_D_PATH}}/myapp';
